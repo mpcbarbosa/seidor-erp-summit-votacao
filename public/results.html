@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resultados · ERP Summit Porto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#07153A; --blue:#65B6FF; --soft:#C9D3E8; --muted:#6E7FA8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { width:100%; height:100%; background:#000; overflow:hidden; font-family:Poppins, Arial, sans-serif; color:#fff; cursor:default; }
+  /* 16:9 stage fitted to the window; all sizes in stage units (1u = 1% of stage width) */
+  .stage { position:absolute; left:50%; top:50%; width:min(100vw, 177.78vh); height:min(56.25vw, 100vh); transform:translate(-50%,-50%);
+    background-size:cover; background-position:center; --u:calc(min(100vw, 177.78vh) / 100); }
+  .logos { position:absolute; right:calc(5*var(--u)); top:calc(4.5*var(--u)); display:flex; gap:calc(1.6*var(--u)); align-items:center; }
+  .logos .sap { height:calc(3*var(--u)); } .logos .logo { height:calc(4*var(--u)); }
+  .label { position:absolute; left:calc(6*var(--u)); top:calc(5.4*var(--u)); font-size:calc(1.15*var(--u)); font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); }
+  .q { position:absolute; left:calc(6*var(--u)); top:calc(9*var(--u)); width:calc(50*var(--u)); font-size:calc(2.6*var(--u)); font-weight:600; line-height:1.3; transition:all .6s ease; }
+  /* phase A: join */
+  .join { position:absolute; inset:0; transition:opacity .5s ease; }
+  .qrcard { position:absolute; right:calc(8*var(--u)); top:calc(14*var(--u)); width:calc(26*var(--u)); padding:calc(1.6*var(--u)); background:#fff; border-radius:calc(1.2*var(--u)); text-align:center; color:var(--navy); box-shadow:0 calc(1*var(--u)) calc(4*var(--u)) rgba(0,0,0,.45); }
+  .qrcard img { width:100%; display:block; }
+  .qrcard .url { margin-top:calc(.8*var(--u)); font-size:calc(1.25*var(--u)); font-weight:600; word-break:break-all; }
+  .counter { position:absolute; left:calc(6*var(--u)); bottom:calc(9*var(--u)); }
+  .counter .n { font-size:calc(9*var(--u)); font-weight:700; line-height:1; color:var(--blue); font-variant-numeric:tabular-nums; }
+  .counter .t { font-size:calc(1.6*var(--u)); color:var(--soft); font-weight:300; margin-top:calc(.6*var(--u)); }
+  .hintjoin { position:absolute; left:calc(6*var(--u)); top:calc(26*var(--u)); font-size:calc(1.5*var(--u)); color:var(--soft); font-weight:300; width:calc(40*var(--u)); }
+  /* phase B: bars */
+  .bars { position:absolute; left:calc(6*var(--u)); right:calc(8*var(--u)); top:calc(20*var(--u)); opacity:0; transition:opacity .5s ease; pointer-events:none; }
+  .row { display:grid; grid-template-columns:calc(24*var(--u)) 1fr calc(8*var(--u)); align-items:center; gap:calc(1.6*var(--u)); margin-bottom:calc(2.4*var(--u)); }
+  .row .lab { font-size:calc(1.7*var(--u)); font-weight:400; color:var(--soft); }
+  .row .lab b { color:var(--blue); font-weight:700; margin-right:calc(.8*var(--u)); }
+  .track { height:calc(4.2*var(--u)); background:rgba(5,10,28,.55); border:1px solid rgba(101,182,255,.25); border-radius:calc(.6*var(--u)); overflow:hidden; }
+  .fill { height:100%; width:0; background:rgba(201,211,232,.55); border-radius:calc(.6*var(--u)); transition:width 1.4s cubic-bezier(.2,.8,.2,1); }
+  .row.top .fill { background:var(--blue); }
+  .row.top .lab { color:#fff; font-weight:600; }
+  .pct { font-size:calc(2.6*var(--u)); font-weight:700; text-align:right; font-variant-numeric:tabular-nums; }
+  .row.top .pct { color:var(--blue); }
+  .total { position:absolute; left:calc(6*var(--u)); bottom:calc(6*var(--u)); font-size:calc(1.4*var(--u)); color:var(--soft); font-weight:300; opacity:0; transition:opacity .5s ease; }
+  body.reveal .join { opacity:0; pointer-events:none; }
+  body.reveal .bars, body.reveal .total { opacity:1; }
+  body.reveal .q { width:calc(70*var(--u)); }
+  .keys { position:absolute; right:calc(2*var(--u)); bottom:calc(1.4*var(--u)); font-size:calc(.85*var(--u)); color:rgba(201,211,232,.35); }
+  .off { position:absolute; left:calc(6*var(--u)); bottom:calc(3*var(--u)); font-size:calc(1*var(--u)); color:#FFB4B4; display:none; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="logos"><img class="sap" id="sap" alt=""><img class="logo" id="logo" alt="SEIDOR"></div>
+  <div class="label">Votação ao vivo</div>
+  <div class="q">Quanto tempo demoraria a sua empresa a saber o impacto desta notícia na margem?</div>
+  <div class="join">
+    <div class="hintjoin">Aponte a câmara do telemóvel ao código. Não precisa de instalar nada.</div>
+    <div class="qrcard"><img src="/qr.svg" alt="QR code da votação"><div class="url" id="url"></div></div>
+    <div class="counter"><div class="n" id="n">0</div><div class="t">respostas</div></div>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="total" id="total"></div>
+  <div class="off" id="off">sem ligação — a tentar de novo…</div>
+  <div class="keys">R revelar · Q voltar ao QR · F ecrã inteiro</div>
+</div>
+<script src="/assets.js"></script>
+<script>
+  const A = window.ASSETS || {};
+  if (A.bgResults) document.getElementById("stage").style.backgroundImage = "url(" + A.bgResults + ")";
+  if (A.logo) document.getElementById("logo").src = A.logo;
+  if (A.sap) document.getElementById("sap").src = A.sap;
+  fetch("/api/info").then(r => r.json()).then(j => { document.getElementById("url").textContent = j.url; }).catch(() => {});
+
+  const OPTS = ["Menos de 1 hora", "Até 1 dia", "Até 1 semana", "Não saberíamos medir"];
+  const bars = document.getElementById("bars");
+  const rows = OPTS.map((t, i) => {
+    const row = document.createElement("div"); row.className = "row";
+    const lab = document.createElement("div"); lab.className = "lab";
+    const k = document.createElement("b"); k.textContent = "ABCD"[i];
+    lab.append(k, document.createTextNode(t));
+    const tr = document.createElement("div"); tr.className = "track";
+    const f = document.createElement("div"); f.className = "fill"; tr.append(f);
+    const pc = document.createElement("div"); pc.className = "pct"; pc.textContent = "0%";
+    row.append(lab, tr, pc); bars.append(row);
+    return { row, f, pc };
+  });
+
+  let last = { counts: [0, 0, 0, 0], total: 0 };
+  let revealed = false;
+  function render() {
+    const { counts, total } = last;
+    document.getElementById("n").textContent = total;
+    document.getElementById("total").textContent = total + (total === 1 ? " resposta" : " respostas");
+    const max = Math.max(...counts);
+    rows.forEach((r, i) => {
+      const pct = total ? Math.round((counts[i] / total) * 100) : 0;
+      r.pc.textContent = pct + "%";
+      r.f.style.width = revealed ? Math.max(pct, total && counts[i] ? 1.5 : 0) + "%" : "0%";
+      r.row.classList.toggle("top", revealed && total > 0 && counts[i] === max);
+    });
+  }
+  async function poll() {
+    try {
+      const r = await fetch("/api/results", { cache: "no-store" });
+      if (!r.ok) throw new Error();
+      last = await r.json();
+      document.getElementById("off").style.display = "none";
+      render();
+    } catch (e) { document.getElementById("off").style.display = "block"; }
+  }
+  function setReveal(v) { revealed = v; document.body.classList.toggle("reveal", v); render(); }
+  document.addEventListener("keydown", (e) => {
+    const k = e.key.toLowerCase();
+    if (k === "r" || k === " " || k === "arrowright" || k === "pagedown" || k === "enter") { e.preventDefault(); setReveal(true); }
+    else if (k === "q" || k === "arrowleft" || k === "pageup") { e.preventDefault(); setReveal(false); }
+    else if (k === "f") { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {}); else document.exitFullscreen(); }
+  });
+  document.getElementById("stage").addEventListener("click", () => setReveal(!revealed));
+  if (new URLSearchParams(location.search).has("revelar")) setReveal(true);
+  poll(); setInterval(poll, 1500);
+</script>
+</body>
+</html>

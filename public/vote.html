@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Votação · ERP Summit Porto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#07153A; --blue:#65B6FF; --soft:#C9D3E8; --muted:#6E7FA8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { min-height:100%; }
+  body { font-family:Poppins, Arial, sans-serif; color:#fff; background:#050A1C; -webkit-tap-highlight-color:transparent; }
+  .bg { position:fixed; inset:0; background-size:cover; background-position:70% center; z-index:-1; }
+  .wrap { max-width:520px; margin:0 auto; padding:24px 20px 40px; min-height:100vh; display:flex; flex-direction:column; }
+  header { display:flex; justify-content:space-between; align-items:center; margin-bottom:36px; }
+  header img.logo { height:30px; }
+  header img.sap { height:24px; }
+  .label { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--blue); margin-bottom:10px; }
+  h1 { font-size:24px; font-weight:600; line-height:1.3; margin-bottom:28px; }
+  .opts { display:flex; flex-direction:column; gap:12px; }
+  button.opt { font:inherit; font-size:17px; color:#fff; text-align:left; padding:18px 18px; border-radius:14px; cursor:pointer;
+    background:rgba(5,10,28,.6); border:1px solid rgba(101,182,255,.55); display:flex; gap:14px; align-items:center; backdrop-filter:blur(6px); }
+  button.opt b { color:var(--blue); font-weight:700; width:18px; }
+  button.opt:active, button.opt.sel { background:var(--blue); color:var(--navy); border-color:var(--blue); }
+  button.opt.sel b { color:var(--navy); }
+  button.opt:disabled { cursor:default; }
+  .done { display:none; text-align:left; margin-top:8px; }
+  .done .tick { width:56px; height:56px; border-radius:50%; background:var(--blue); color:var(--navy); display:flex; align-items:center; justify-content:center; font-size:30px; font-weight:700; margin-bottom:18px; }
+  .done h2 { font-size:22px; font-weight:600; margin-bottom:8px; }
+  .done p { color:var(--soft); font-weight:300; }
+  .err { color:#FFB4B4; margin-top:16px; font-size:14px; min-height:20px; }
+  footer { margin-top:auto; padding-top:32px; color:var(--muted); font-size:12px; font-weight:300; }
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+  <header><img class="logo" id="logo" alt="SEIDOR"><img class="sap" id="sap" alt="SAP Platinum Partner"></header>
+  <div id="ask">
+    <div class="label">Votação ao vivo</div>
+    <h1>Quanto tempo demoraria a sua empresa a saber o impacto desta notícia na margem?</h1>
+    <div class="opts" id="opts"></div>
+    <div class="err" id="err"></div>
+  </div>
+  <div class="done" id="done">
+    <div class="tick">✓</div>
+    <h2>Obrigado. Resposta registada.</h2>
+    <p>Acompanhe o resultado no ecrã.</p>
+  </div>
+  <footer>ERP Summit Session · Porto · 24 nov. 2026 — «Quanto custa uma notícia?»</footer>
+</div>
+<script src="/assets.js"></script>
+<script>
+  const A = window.ASSETS || {};
+  if (A.bgVote) document.getElementById("bg").style.backgroundImage = "url(" + A.bgVote + ")";
+  if (A.logo) document.getElementById("logo").src = A.logo;
+  if (A.sap) document.getElementById("sap").src = A.sap;
+  const OPTS = ["Menos de 1 hora", "Até 1 dia", "Até 1 semana", "Não saberíamos medir"];
+  const box = document.getElementById("opts");
+  let voted = false;
+  try { voted = localStorage.getItem("erp-summit-voted") === "1"; } catch (e) {}
+  function done() { document.getElementById("ask").style.display = "none"; document.getElementById("done").style.display = "block"; }
+  if (voted) done();
+  OPTS.forEach((t, i) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    const k = document.createElement("b"); k.textContent = "ABCD"[i];
+    const s = document.createElement("span"); s.textContent = t;
+    b.append(k, s);
+    b.onclick = async () => {
+      if (voted) return;
+      voted = true;
+      box.querySelectorAll("button").forEach((x) => (x.disabled = true));
+      b.classList.add("sel");
+      try {
+        const r = await fetch("/api/vote", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ o: i }), credentials: "same-origin" });
+        if (!r.ok) throw new Error();
+        try { localStorage.setItem("erp-summit-voted", "1"); } catch (e) {}
+        setTimeout(done, 350);
+      } catch (e) {
+        voted = false;
+        b.classList.remove("sel");
+        box.querySelectorAll("button").forEach((x) => (x.disabled = false));
+        document.getElementById("err").textContent = "Não foi possível registar. Tente de novo.";
+      }
+    };
+    box.appendChild(b);
+  });
+</script>
+</body>
+</html>
