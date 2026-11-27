@@ -4,7 +4,6 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const QRCode = require("qrcode");
-const tracking = require("./tracking");
 
 const PORT = process.env.PORT || 3000;
 const ADMIN_KEY = process.env.ADMIN_KEY || "seidor";
@@ -75,7 +74,6 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && (p === "/" || p === "/votar")) return file(res, "vote.html");
     if (req.method === "GET" && p === "/resultados") return file(res, "results.html");
     if (req.method === "GET" && p === "/assets.js") return file(res, "assets.js");
-    if (await tracking.handle(req, res, p, url)) return;
     if (req.method === "GET" && p === "/healthz") return send(res, 200, '{"ok":true}');
     if (req.method === "GET" && p === "/qr.svg") {
       const svg = await QRCode.toString(baseUrl(req) + "/", { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#07153A", light: "#FFFFFF" } });
@@ -113,4 +111,4 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-Promise.all([initStore(), tracking.init()]).then(() => server.listen(PORT, () => console.log("a ouvir na porta " + PORT)));
+initStore().then(() => server.listen(PORT, () => console.log("a ouvir na porta " + PORT)));

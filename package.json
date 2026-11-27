@@ -2,7 +2,7 @@
   "name": "seidor-erp-summit-votacao",
   "version": "1.0.0",
   "private": true,
-  "description": "Votação ao vivo — ERP Summit Session Porto 2026 (Seidor)",
+  "description": "Vota\u00e7\u00e3o ao vivo \u2014 ERP Summit Session Porto 2026 (Seidor)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "qrcode": "^1.5.4",
-    "redis": "^4.7.0",
-    "pg": "^8.13.1"
+    "redis": "^4.7.0"
   }
 }
