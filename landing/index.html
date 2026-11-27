@@ -105,6 +105,9 @@ details li span{color:var(--muted)}
 #ok{display:none;align-items:center;gap:14px;background:rgba(255,255,255,.08);border:1px solid rgba(101,182,255,.5);border-radius:14px;padding:18px 22px;font-size:18px}
 #ok i{width:34px;height:34px;border-radius:50%;background:var(--sky);color:var(--navy);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;flex:none}
 .sent #ok{display:flex}.sent #cbtn{display:none}
+.ok-hero{display:none;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid rgba(101,182,255,.5);border-radius:14px;padding:12px 18px;font-size:16px;color:#fff}
+.ok-hero i{width:28px;height:28px;border-radius:50%;background:var(--sky);color:var(--navy);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;flex:none}
+body.sent .ok-hero{display:flex}body.sent .js-contact{display:none}
 .alt-contact{font-size:15px;color:var(--soft)}
 .alt-contact a{color:#fff}
 footer{background:var(--navy);color:var(--soft);font-size:13px;padding:32px 0 calc(32px + env(safe-area-inset-bottom))}
@@ -132,7 +135,8 @@ footer p.priv{max-width:70ch}
     <h1>Quanto custa uma notícia?</h1>
     <p class="greet" id="greet">Obrigado pelo interesse na sessão da Seidor. Reunimos aqui os pontos principais, para rever com calma ou partilhar com a sua equipa.</p>
     <div class="actions">
-      <a class="btn primary" href="#contacto" data-track="hero-contacto">Pedir contacto</a>
+      <button class="btn primary js-contact" type="button" data-src="topo">Pedido de contacto</button>
+      <div class="ok-hero" role="status" aria-live="polite"><i>✓</i><span>Pedido de contacto enviado. Obrigado, entraremos em contacto brevemente.</span></div>
       <a class="btn ghost" href="#pergunta" data-track="hero-resumo">Ver o resumo</a>
     </div>
   </div>
@@ -288,7 +292,7 @@ footer p.priv{max-width:70ch}
     <h2>Não controlamos as notícias. Controlamos o tempo que demoramos a responder-lhes.</h2>
     <p class="lead">Se quiser olhar para estas perguntas na realidade da sua empresa, deixe-nos um pedido de contacto. Respondemos nos próximos dias úteis.</p>
     <div class="actions">
-      <button class="btn primary" id="cbtn" type="button">Pedido de contacto</button>
+      <button class="btn primary js-contact" id="cbtn" type="button" data-src="fim">Pedido de contacto</button>
       <div id="ok" role="status" aria-live="polite"><i>✓</i><span>Pedido de contacto enviado. Obrigado, entraremos em contacto brevemente.</span></div>
     </div>
     <p class="alt-contact" style="margin-top:22px">Prefere escrever? <a href="mailto:mbarbosa@seidor.com?subject=ERP%20Summit%20Session%20%C2%B7%20Quanto%20custa%20uma%20not%C3%ADcia%3F" data-track="email">mbarbosa@seidor.com</a></p>
@@ -354,17 +358,24 @@ footer p.priv{max-width:70ch}
     if (el.tagName === "DETAILS") { if (e.target.closest("summary")) post({ type: "click", data: name + (el.open ? ":fechar" : ":abrir") }); return; }
     post({ type: "click", data: name });
   });
-  // pedido de contacto
+  // pedido de contacto: os dois botões (topo e fim) fazem o mesmo pedido
   var box = document.getElementById("cbox");
   var key = "pc-" + (t || "anon");
-  try { if (localStorage.getItem(key)) box.classList.add("sent"); } catch (e) {}
-  document.getElementById("cbtn").addEventListener("click", function(){
-    box.classList.add("sent");
+  function markSent(){ box.classList.add("sent"); document.body.classList.add("sent"); }
+  try { if (localStorage.getItem(key)) markSent(); } catch (e) {}
+  var sentOnce = false;
+  function requestContact(src){
+    markSent();
+    if (sentOnce) return;
+    sentOnce = true;
     try { localStorage.setItem(key, "1"); } catch (e) {}
     var tries = 0;
     (function send(){
-      post({ type: "contact", data: "botao" }).then(function(r){ if (r && r.ok === false) throw 0; }).catch(function(){ if (++tries < 4) setTimeout(send, 4000 * tries); });
+      post({ type: "contact", data: "botao-" + src }).then(function(r){ if (r && r.ok === false) throw 0; }).catch(function(){ if (++tries < 4) setTimeout(send, 4000 * tries); });
     })();
+  }
+  document.querySelectorAll(".js-contact").forEach(function(b){
+    b.addEventListener("click", function(){ requestContact(b.getAttribute("data-src") || "fim"); });
   });
 })();
 </script>
