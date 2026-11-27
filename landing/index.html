@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Quanto custa uma notícia? · Seidor</title>
+<meta name="description" content="Resumo da sessão da Seidor na ERP Summit Session, Porto, 24 de novembro de 2026.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Quanto custa uma notícia?">
+<meta property="og:description" content="Resumo da sessão da Seidor na ERP Summit Session · Porto · 24 nov. 2026">
+<meta property="og:image" content="https://seidor-quanto-custa-uma-noticia.onrender.com/img/og.jpg">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#07153A;--blue:#1D5CFF;--sky:#65B6FF;--soft:#C9D3E8;--ink:#07153A;--muted:#4a5878;--line:#dfe5ef;--panel:#f4f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:17px/1.6 Poppins,Arial,sans-serif;color:var(--ink);background:#fff;-webkit-text-size-adjust:100%}
+.w{max-width:1080px;margin:0 auto;padding:0 max(24px,env(safe-area-inset-left))}
+h1,h2,h3{line-height:1.15;letter-spacing:-.015em}
+h2{font-size:clamp(28px,4vw,40px);font-weight:700;margin-bottom:18px}
+h3{font-size:20px;font-weight:600}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+p+p{margin-top:12px}
+.lead{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:62ch}
+section{padding:88px 0}
+section.alt{background:var(--panel)}
+/* hero */
+.hero{background:#050c24 url(img/bgResults.jpg) center/cover no-repeat;color:#fff;padding:28px 0 96px;min-height:88vh;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:center}
+.top img.logo{height:40px}.top img.sap{height:30px}
+.hero .w{width:100%}
+.hero-body{margin-top:auto;padding-top:80px}
+.hero .eyebrow{color:var(--sky)}
+.hero h1{font-size:clamp(44px,7.5vw,92px);font-weight:700;max-width:12ch}
+.hero .greet{font-size:clamp(19px,2.4vw,24px);color:var(--soft);font-weight:300;margin-top:22px;max-width:52ch}
+.hero .greet b{color:#fff;font-weight:600}
+.hero .actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px}
+.btn{font:600 16px Poppins,Arial,sans-serif;border-radius:999px;padding:15px 26px;cursor:pointer;border:1px solid transparent;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:52px}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:#1749d6}
+.btn.ghost{border-color:rgba(255,255,255,.45);color:#fff;background:transparent}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+/* news */
+.news{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center}
+.clip{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;box-shadow:0 18px 40px rgba(7,21,58,.08)}
+.clip small{display:block;color:var(--muted);font-size:13px;margin-bottom:10px}
+.clip strong{font-size:24px;line-height:1.3;display:block}
+.poll{margin-top:28px;border-left:3px solid var(--blue);padding-left:18px;color:var(--muted)}
+.poll b{color:var(--ink)}
+/* formula */
+.formula{background:var(--navy);color:#fff}
+.formula .eyebrow{color:var(--sky)}
+.eq{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:18px;align-items:stretch;margin-top:36px}
+.term{border:1px solid rgba(101,182,255,.35);border-radius:14px;padding:26px 22px;background:rgba(255,255,255,.03)}
+.term .t{font-size:clamp(22px,2.6vw,30px);font-weight:700}
+.term p{color:var(--soft);margin-top:8px;font-size:15px}
+.term.mine{background:var(--blue);border-color:var(--blue)}
+.term.mine p{color:#fff}
+.op{display:flex;align-items:center;font-size:36px;font-weight:300;color:var(--sky)}
+/* stations */
+.stations{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:36px;counter-reset:s}
+.st{border:1px solid var(--line);border-radius:14px;padding:22px;background:#fff;position:relative}
+.st::before{counter-increment:s;content:counter(s);font-size:13px;font-weight:600;color:#fff;background:var(--navy);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.st p{color:var(--muted);font-size:15px;margin-top:6px}
+.quote{margin-top:36px;font-size:clamp(20px,2.4vw,26px);font-weight:500;max-width:30ch}
+/* cases */
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:36px}
+.case{border:1px solid var(--line);border-radius:14px;background:#fff;padding:24px;display:flex;flex-direction:column}
+.case .tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.case h3{margin:8px 0}
+.case>p{color:var(--muted);font-size:15px}
+details{margin-top:auto;padding-top:14px}
+summary{cursor:pointer;font-weight:600;font-size:15px;color:var(--blue);list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;line-height:1}
+details[open] summary::after{content:"−"}
+details ul{list-style:none;margin-top:6px}
+details li{padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+details li b{display:block;color:var(--ink)}
+details li span{color:var(--muted)}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+.joule{margin-top:18px;background:var(--navy);color:#fff;border-radius:14px;padding:26px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.joule p{color:var(--soft)}
+.joule details summary{color:var(--sky)}
+.joule details li{border-color:rgba(255,255,255,.15)}
+.joule details li b{color:#fff}.joule details li span{color:var(--soft)}
+/* foundations */
+.found{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:36px}
+.fd{border-top:3px solid var(--navy);padding-top:14px}
+.fd:first-child{border-color:var(--blue)}
+.fd p{color:var(--muted);font-size:15px;margin-top:6px}
+/* questions */
+.qs{margin-top:28px;display:grid;gap:14px;max-width:760px}
+.q{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.q span{font-size:28px;font-weight:700;color:var(--blue);line-height:1}
+.q p{font-size:clamp(17px,2vw,20px);font-weight:500}
+/* cta */
+.cta{background:#050c24 url(img/bgVote.jpg) center/cover no-repeat;color:#fff;text-align:left}
+.cta .box{max-width:640px}
+.cta .eyebrow{color:var(--sky)}
+.cta p.lead{color:var(--soft)}
+.cta .actions{margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+#ok{display:none;align-items:center;gap:14px;background:rgba(255,255,255,.08);border:1px solid rgba(101,182,255,.5);border-radius:14px;padding:18px 22px;font-size:18px}
+#ok i{width:34px;height:34px;border-radius:50%;background:var(--sky);color:var(--navy);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;flex:none}
+.sent #ok{display:flex}.sent #cbtn{display:none}
+.alt-contact{font-size:15px;color:var(--soft)}
+.alt-contact a{color:#fff}
+footer{background:var(--navy);color:var(--soft);font-size:13px;padding:32px 0 calc(32px + env(safe-area-inset-bottom))}
+footer .w{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+footer a{color:#fff}
+footer p.priv{max-width:70ch}
+@media(max-width:860px){
+ section{padding:64px 0}
+ .news,.joule{grid-template-columns:1fr;gap:28px}
+ .eq{grid-template-columns:1fr}.op{justify-content:center;font-size:28px}
+ .stations{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .cases{grid-template-columns:1fr}
+ .found{grid-template-columns:1fr 1fr}
+ .top img.logo{height:32px}.top img.sap{height:24px}
+}
+@media(max-width:480px){.stations,.found{grid-template-columns:1fr}.q{grid-template-columns:40px minmax(0,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="hero" data-sec="inicio">
+  <div class="w top"><img class="logo" src="img/logo.png" alt="SEIDOR"><img class="sap" src="img/sap.png" alt="SAP Platinum Partner"></div>
+  <div class="w hero-body">
+    <div class="eyebrow">ERP Summit Session · Porto · 24 nov. 2026</div>
+    <h1>Quanto custa uma notícia?</h1>
+    <p class="greet" id="greet">Obrigado pelo interesse na sessão da Seidor. Reunimos aqui os pontos principais, para rever com calma ou partilhar com a sua equipa.</p>
+    <div class="actions">
+      <a class="btn primary" href="#contacto" data-track="hero-contacto">Pedir contacto</a>
+      <a class="btn ghost" href="#pergunta" data-track="hero-resumo">Ver o resumo</a>
+    </div>
+  </div>
+</header>
+
+<section id="pergunta" data-sec="a-pergunta">
+  <div class="w news">
+    <div>
+      <div class="eyebrow">A pergunta</div>
+      <h2>Não quanto custa ao setor. Quanto custa à sua empresa.</h2>
+      <p class="lead">Começámos com uma manchete da semana. A pergunta que deixámos à sala não era retórica: quanto custa esta notícia à sua empresa, em euros, na margem deste trimestre?</p>
+      <div class="poll">Na votação ao vivo perguntámos: <b>quanto tempo demoraria a sua empresa a saber o impacto desta notícia na margem?</b> Menos de uma hora, até um dia, até uma semana, ou não saberíamos medir.</div>
+    </div>
+    <div class="clip">
+      <small>Jornal de Negócios · novembro de 2026</small>
+      <strong>A indústria portuguesa pode pagar mais 1,1 mil milhões de euros de energia em 2027.</strong>
+    </div>
+  </div>
+</section>
+
+<section class="formula" data-sec="a-formula">
+  <div class="w">
+    <div class="eyebrow">A fórmula</div>
+    <h2>O custo de uma notícia</h2>
+    <div class="eq">
+      <div class="term"><div class="t">Custo</div><p>O que a notícia tira à margem.</p></div>
+      <div class="op">=</div>
+      <div class="term"><div class="t">Impacto</div><p>Não o pode evitar. Mas vai senti-lo.</p></div>
+      <div class="op">×</div>
+      <div class="term mine"><div class="t">Tempo de resposta</div><p>Este sim, é seu. Controla-o por dentro.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" data-sec="contexto">
+  <div class="w">
+    <div class="eyebrow">2026 em notícias</div>
+    <h2>A incerteza tem um custo, e paga-se em tempo.</h2>
+    <p class="lead">Nenhuma das grandes notícias do ano foi escrita a pensar na indústria do Norte. Todas lá chegaram.</p>
+    <details data-track="contexto-detalhe">
+      <summary>Ver os exemplos da sessão</summary>
+      <ul>
+        <li><b>Energia</b><span>Mais 1,1 mil milhões de euros previstos na fatura da indústria em 2027.</span></li>
+        <li><b>Petróleo</b><span>Mudou de direção quatro vezes no ano. A 4 de novembro caiu 9,5% num só dia, por causa de eleições nos Estados Unidos.</span></li>
+        <li><b>Tarifas dos EUA</b><span>A regra mudou três vezes num ano. Quantas vezes se refizeram propostas para clientes americanos, e quanto tempo demorou cada uma?</span></li>
+        <li><b>Rotas e abastecimento</b><span>Tensões no Estreito de Ormuz e portos fechados chegam à fábrica como atrasos de fornecedores.</span></li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section data-sec="estacoes">
+  <div class="w">
+    <div class="eyebrow">Onde se perde o tempo</div>
+    <h2>Antes de ser decisão, uma notícia passa por quatro estações.</h2>
+    <div class="stations">
+      <div class="st"><h3>Detetar</h3><p>Alguém lê o jornal, ou um email de um fornecedor.</p></div>
+      <div class="st"><h3>Perceber</h3><p>Alguém exporta para Excel e cruza consumos, stocks e preços.</p></div>
+      <div class="st"><h3>Decidir</h3><p>Reunião à segunda-feira.</p></div>
+      <div class="st"><h3>Executar</h3><p>Alterações feitas à mão, sistema a sistema.</p></div>
+    </div>
+    <p class="quote">O problema não é falta de dados. É que os dados não falam entre si.</p>
+  </div>
+</section>
+
+<section class="alt" data-sec="respostas-sap">
+  <div class="w">
+    <div class="eyebrow">O que a tecnologia SAP já responde</div>
+    <h2>Quatro notícias, quatro estações.</h2>
+    <p class="lead">Nenhum destes agentes decide por si. Fazem o trabalho entre a notícia e a decisão, que é exatamente onde se perde o tempo.</p>
+    <div class="cases">
+      <div class="case">
+        <div class="tag">Planeamento</div>
+        <h3>Energia e matérias-primas sobem 15%</h3>
+        <p>O problema chega ao planeador já com cenários simulados e a explicação do que mudou, não na reunião de segunda-feira.</p>
+        <details data-track="caso-planeamento"><summary>Que agentes</summary><ul>
+          <li><b>Planning Assistant</b><span>Antecipa exceções e restrições em toda a rede de abastecimento.</span></li>
+          <li><b>Agentes de planeamento</b><span>Detetam exceções ao plano, simulam cenários e explicam o que mudou.</span></li>
+        </ul><p class="note">Agentes de planeamento: disponibilidade geral prevista para o 4.º trimestre de 2026.</p></details>
+      </div>
+      <div class="case">
+        <div class="tag">Compras e fornecedores</div>
+        <h3>Porto fechado: fornecedor atrasa seis semanas</h3>
+        <p>O alerta chega a quem compra, com as encomendas afetadas e alternativas, não por email uma semana depois.</p>
+        <details data-track="caso-fornecedores"><summary>Que agentes</summary><ul>
+          <li><b>Business Network Assistant</b><span>Coordena fornecedores, operadores logísticos e parceiros de serviço.</span></li>
+          <li><b>Joule Sourcing Assistant</b><span>Sinaliza riscos num fornecedor e propõe alternativas. Quem decide é o comprador.</span></li>
+        </ul><p class="note">Business Network: faseado em 2026. Sourcing Assistant: em piloto.</p></details>
+      </div>
+      <div class="case">
+        <div class="tag">Produção e manutenção</div>
+        <h3>Linha 3 parada: falha de qualidade</h3>
+        <p>A máquina dá sinais na terça-feira. A linha não tem de parar na sexta.</p>
+        <details data-track="caso-producao"><summary>Que agentes</summary><ul>
+          <li><b>Manufacturing Assistant</b><span>Liga os sinais do chão de fábrica ao contexto operacional.</span></li>
+          <li><b>Production Excellence Agent</b><span>Vigia produção, qualidade e máquinas.</span></li>
+          <li><b>Asset Performance Alert Processing Agent</b><span>Avalia o estado dos equipamentos e prioriza.</span></li>
+          <li><b>Technician Briefing Agent</b><span>Prepara o técnico para resolver à primeira.</span></li>
+        </ul></details>
+      </div>
+      <div class="case">
+        <div class="tag">Armazém e transporte</div>
+        <h3>Cliente antecipa encomenda; transportador falha</h3>
+        <p>Armazém e transporte reorganizam-se no próprio dia. A SAP refere um cliente que recuperou cerca de um terço do tempo gasto a resolver incidentes logísticos.</p>
+        <details data-track="caso-logistica"><summary>Que agentes</summary><ul>
+          <li><b>Logistics Assistant</b><span>Mantém armazém e transporte a andar quando as condições mudam.</span></li>
+          <li><b>Agentes de armazém e transporte</b><span>Validam receções e ajustam a mão de obra do armazém à carga.</span></li>
+        </ul><p class="note">Disponibilidade geral prevista para o 4.º trimestre de 2026.</p></details>
+      </div>
+    </div>
+    <div class="joule">
+      <div><div class="eyebrow" style="color:var(--sky)">Para dentro</div><h3 style="font-size:24px">Nem todas as notícias vêm de fora. O Joule trata dos processos internos.</h3></div>
+      <div><p>Fecho de contas, compras e aprovações com menos trabalho manual, e quem decide continua a decidir.</p>
+        <details data-track="joule"><summary>Exemplos</summary><ul>
+          <li><b>Finanças</b><span>Fecho de contas, reconhecimento de receita e compliance com menos trabalho manual.</span></li>
+          <li><b>Compras</b><span>Pedidos, aprovações e fornecedores com agentes, e o comprador a decidir.</span></li>
+        </ul></details></div>
+    </div>
+  </div>
+</section>
+
+<section data-sec="fundacoes">
+  <div class="w">
+    <div class="eyebrow">Antes da IA</div>
+    <h2>Um agente sobre dados maus é só um erro mais rápido.</h2>
+    <p class="lead">Cinco fundações. Sem elas, nenhum agente funciona bem.</p>
+    <div class="found">
+      <div class="fd"><h3>Dados mestre</h3><p>A SAP criou um agente só para isto. Diz muito.</p></div>
+      <div class="fd"><h3>Núcleo limpo</h3><p>ERP standard, de preferência na cloud.</p></div>
+      <div class="fd"><h3>Integração</h3><p>Chão de fábrica e ERP a falar entre si.</p></div>
+      <div class="fd"><h3>Pessoas no circuito</h3><p>Quem aprova o quê, com que limites.</p></div>
+      <div class="fd"><h3>Segurança</h3><p>A indústria transformadora está abrangida pela NIS2.</p></div>
+    </div>
+    <p class="note" style="margin-top:24px;font-size:15px">Por onde começar? Não pela IA. Pelo processo onde a notícia fica mais tempo parada.</p>
+  </div>
+</section>
+
+<section class="alt" data-sec="tres-perguntas">
+  <div class="w">
+    <div class="eyebrow">Para segunda-feira de manhã</div>
+    <h2>Três perguntas.</h2>
+    <div class="qs">
+      <div class="q"><span>1</span><p>Quanto tempo demorámos a medir o impacto da última notícia que nos afetou?</p></div>
+      <div class="q"><span>2</span><p>Em que estação perdemos mais tempo: detetar, perceber, decidir ou executar?</p></div>
+      <div class="q"><span>3</span><p>Os nossos dados mestre aguentavam um agente de IA amanhã?</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contacto" data-sec="contacto">
+  <div class="w"><div class="box" id="cbox">
+    <div class="eyebrow">Falamos?</div>
+    <h2>Não controlamos as notícias. Controlamos o tempo que demoramos a responder-lhes.</h2>
+    <p class="lead">Se quiser olhar para estas perguntas na realidade da sua empresa, deixe-nos um pedido de contacto. Respondemos nos próximos dias úteis.</p>
+    <div class="actions">
+      <button class="btn primary" id="cbtn" type="button">Pedido de contacto</button>
+      <div id="ok" role="status" aria-live="polite"><i>✓</i><span>Pedido de contacto enviado. Obrigado, entraremos em contacto brevemente.</span></div>
+    </div>
+    <p class="alt-contact" style="margin-top:22px">Prefere escrever? <a href="mailto:mbarbosa@seidor.com?subject=ERP%20Summit%20Session%20%C2%B7%20Quanto%20custa%20uma%20not%C3%ADcia%3F" data-track="email">mbarbosa@seidor.com</a></p>
+  </div></div>
+</section>
+
+<footer data-sec="rodape">
+  <div class="w">
+    <p><b style="color:#fff">Miguel Barbosa</b> · Seidor Portugal · <a href="mailto:mbarbosa@seidor.com" data-track="email-rodape">mbarbosa@seidor.com</a> · <a href="https://www.seidor.com/pt-pt" target="_blank" rel="noopener" data-track="site-seidor">seidor.com</a></p>
+    <p class="priv">Esta página regista as visitas e interações associadas ao link que recebeu, para efeitos de seguimento comercial da Seidor Portugal. Pode pedir a remoção destes dados para mbarbosa@seidor.com.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:3999" : "https://seidor-erp-summit-votacao.onrender.com";
+  var qs = new URLSearchParams(location.search);
+  var t = (qs.get("t") || "").slice(0, 40);
+  var sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
+  var active = 0, maxScroll = 0, lastTick = Date.now();
+  function post(o, beacon){
+    o.t = t; o.sid = sid; o.sec = active; o.scroll = maxScroll;
+    var body = JSON.stringify(o);
+    try {
+      if (beacon && navigator.sendBeacon) { navigator.sendBeacon(API + "/api/t", body); return Promise.resolve(); }
+      return fetch(API + "/api/t", { method: "POST", body: body, keepalive: true, mode: "cors", headers: { "Content-Type": "text/plain" } });
+    } catch (e) { return Promise.reject(e); }
+  }
+  // saudação personalizada (se o servidor responder)
+  if (t) fetch(API + "/api/t/hello?t=" + encodeURIComponent(t)).then(function(r){ return r.json(); }).then(function(j){
+    if (!j || !j.pn) return;
+    var g = document.getElementById("greet"); g.textContent = "";
+    var b = document.createElement("b"); b.textContent = "Obrigado, " + j.pn + ".";
+    g.append(b, document.createTextNode(" Reunimos aqui os pontos principais da sessão, para rever com calma ou partilhar com a equipa da " + j.emp + "."));
+  }).catch(function(){});
+  post({ type: "open", data: document.referrer ? "ref" : "", ref: document.referrer });
+  // tempo ativo: só conta com a página visível
+  setInterval(function(){
+    var now = Date.now();
+    if (document.visibilityState === "visible") active += Math.round((now - lastTick) / 1000);
+    lastTick = now;
+  }, 1000);
+  setInterval(function(){ if (document.visibilityState === "visible") post({ type: "ping" }); }, 15000);
+  document.addEventListener("visibilitychange", function(){ lastTick = Date.now(); if (document.visibilityState === "hidden") post({ type: "ping" }, true); });
+  addEventListener("pagehide", function(){ post({ type: "ping" }, true); });
+  addEventListener("scroll", function(){
+    var h = document.documentElement; var p = Math.round(100 * (h.scrollTop + innerHeight) / h.scrollHeight);
+    if (p > maxScroll) maxScroll = Math.min(100, p);
+  }, { passive: true });
+  // secções vistas
+  var seen = {};
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      var s = e.target.getAttribute("data-sec");
+      if (e.isIntersecting && !seen[s]) { seen[s] = 1; post({ type: "section", data: s }); }
+    }); }, { threshold: 0.4 });
+    document.querySelectorAll("[data-sec]").forEach(function(el){ io.observe(el); });
+  }
+  // cliques em áreas com mais informação
+  document.addEventListener("click", function(e){
+    var el = e.target.closest("[data-track]"); if (!el) return;
+    var name = el.getAttribute("data-track");
+    if (el.tagName === "DETAILS") { if (e.target.closest("summary")) post({ type: "click", data: name + (el.open ? ":fechar" : ":abrir") }); return; }
+    post({ type: "click", data: name });
+  });
+  // pedido de contacto
+  var box = document.getElementById("cbox");
+  var key = "pc-" + (t || "anon");
+  try { if (localStorage.getItem(key)) box.classList.add("sent"); } catch (e) {}
+  document.getElementById("cbtn").addEventListener("click", function(){
+    box.classList.add("sent");
+    try { localStorage.setItem(key, "1"); } catch (e) {}
+    var tries = 0;
+    (function send(){
+      post({ type: "contact", data: "botao" }).then(function(r){ if (r && r.ok === false) throw 0; }).catch(function(){ if (++tries < 4) setTimeout(send, 4000 * tries); });
+    })();
+  });
+})();
+</script>
+</body>
+</html>

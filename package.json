@@ -4,7 +4,15 @@
   "private": true,
   "description": "Votação ao vivo — ERP Summit Session Porto 2026 (Seidor)",
   "main": "server.js",
-  "scripts": { "start": "node server.js" },
-  "engines": { "node": ">=18" },
-  "dependencies": { "qrcode": "^1.5.4", "redis": "^4.7.0" }
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4",
+    "redis": "^4.7.0",
+    "pg": "^8.13.1"
+  }
 }
