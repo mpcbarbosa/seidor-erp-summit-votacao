@@ -304,7 +304,7 @@ footer p.priv{max-width:70ch}
 
 <script>
 (function(){
-  var API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:3999" : "https://seidor-erp-summit-votacao.onrender.com";
+  var API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:3000/api/public" : "https://fupcrm.onrender.com/api/public";
   var qs = new URLSearchParams(location.search);
   var t = (qs.get("t") || "").slice(0, 40);
   var sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
@@ -313,12 +313,12 @@ footer p.priv{max-width:70ch}
     o.t = t; o.sid = sid; o.sec = active; o.scroll = maxScroll;
     var body = JSON.stringify(o);
     try {
-      if (beacon && navigator.sendBeacon) { navigator.sendBeacon(API + "/api/t", body); return Promise.resolve(); }
-      return fetch(API + "/api/t", { method: "POST", body: body, keepalive: true, mode: "cors", headers: { "Content-Type": "text/plain" } });
+      if (beacon && navigator.sendBeacon) { navigator.sendBeacon(API + "/t", body); return Promise.resolve(); }
+      return fetch(API + "/t", { method: "POST", body: body, keepalive: true, mode: "cors", headers: { "Content-Type": "text/plain" } });
     } catch (e) { return Promise.reject(e); }
   }
   // saudação personalizada (se o servidor responder)
-  if (t) fetch(API + "/api/t/hello?t=" + encodeURIComponent(t)).then(function(r){ return r.json(); }).then(function(j){
+  if (t) fetch(API + "/t/hello?t=" + encodeURIComponent(t)).then(function(r){ return r.json(); }).then(function(j){
     if (!j || !j.pn) return;
     var g = document.getElementById("greet"); g.textContent = "";
     var b = document.createElement("b"); b.textContent = "Obrigado, " + j.pn + ".";
