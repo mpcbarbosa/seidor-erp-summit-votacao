@@ -322,7 +322,7 @@ footer p.priv{max-width:70ch}
     if (!j || !j.pn) return;
     var g = document.getElementById("greet"); g.textContent = "";
     var b = document.createElement("b"); b.textContent = "Obrigado, " + j.pn + ".";
-    g.append(b, document.createTextNode(" Reunimos aqui os pontos principais da sessão, para rever com calma ou partilhar com a equipa da " + j.emp + "."));
+    g.append(b, document.createTextNode(" Reunimos aqui os pontos principais da sessão, para rever com calma ou partilhar com a sua equipa."));
   }).catch(function(){});
   post({ type: "open", data: document.referrer ? "ref" : "", ref: document.referrer });
   // tempo ativo: só conta com a página visível
